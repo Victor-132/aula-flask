@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>VMitter</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right" style="justify-content: flex-end">
+            <li role="presentation" style="border-width: 1px; border-color: blue;border-radius: 4px;
+              background-color: blue; padding-top: 10px; padding-bottom: 10px; padding-right: 15px; padding-left: 15px; color:white"><a href="#">Home</a></li>
+            <li role="presentation" style="border-width: 1px; border-color:white;border-radius: 4px;
+            background-color:white; padding-top: 10px; padding-bottom: 10px; padding-right: 15px; padding-left: 15px"><a href="#">About</a></li>
+            {% if current_user.is_authenticated %}
+              <li style="border-width: 1px; border-color:white;border-radius: 4px;
+              background-color: white; padding-top: 10px; padding-bottom: 10px; padding-right: 15px; padding-left: 15px"><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+              <li style="border-width: 1px; border-color:white;border-radius: 4px;
+              background-color: white; padding-top: 10px; padding-bottom: 10px; padding-right: 15px; padding-left: 15px"><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+        <h3 class="text-muted">VMitter</h3>
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="alet alert-warning">
+            <ul class="flashes">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}
+      {% endblock %}
+
+      <footer class="footer">
+        <p>&copy: 2016 Company, Inc.</p>
+      </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  </body>
+</html>
